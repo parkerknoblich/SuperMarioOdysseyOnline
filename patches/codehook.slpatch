@@ -40,7 +40,7 @@ B59E28 B seadPrintHook // sead::system::print
 
 //Shine::get
 1D03EC MOV X1, X19
-1D03F4 BL sendShinePacket
+1D03F4 BL damagePlayerOnShineGet
 
 //Shine::getWithDemo
 1D1378 MOV X1, X19

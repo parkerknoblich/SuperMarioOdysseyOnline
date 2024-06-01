@@ -286,6 +286,10 @@ void sendShinePacket(GameDataHolderAccessor thisPtr, Shine* curShine) {
     GameDataFunction::setGotShine(thisPtr, curShine->curShineInfo);
 }
 
+void damagePlayerOnShineGet(GameDataHolderAccessor thisPtr, Shine* curShine) {
+    GameDataFunction::damagePlayer(thisPtr);
+}
+
 void stageInitHook(al::ActorInitInfo *info, StageScene *curScene, al::PlacementInfo const *placement, al::LayoutInitInfo const *lytInfo, al::ActorFactory const *factory, al::SceneMsgCtrl *sceneMsgCtrl, al::GameDataHolderBase *dataHolder) {
 
     al::initActorInitInfo(info, curScene, placement, lytInfo, factory, sceneMsgCtrl,
