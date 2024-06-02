@@ -982,6 +982,15 @@ void Client::sendToStage(ChangeStagePacket* packet) {
         GameDataFunction::tryChangeNextStage(accessor, &info);
     }
 }
+
+void Client::warp() {
+    if (sInstance->mSceneInfo && sInstance->mSceneInfo->mSceneObjHolder) {
+        GameDataHolderAccessor accessor(sInstance->mSceneInfo->mSceneObjHolder);
+        ChangeStageInfo info(accessor.mData, "", "TrexPoppunExStage", false, 2, static_cast<ChangeStageInfo::SubScenarioType>(0));
+        GameDataFunction::tryChangeNextStage(accessor, &info);
+    }
+}
+
 /**
  * @brief 
  * Send a udp holepunch packet to the server

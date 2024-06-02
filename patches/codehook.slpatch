@@ -40,23 +40,25 @@ B59E28 B seadPrintHook // sead::system::print
 
 //Shine::get
 1D03EC MOV X1, X19
-1D03F4 BL sendShinePacket
+1D03F4 BL warpPlayer
 
 //Shine::getWithDemo
 1D1378 MOV X1, X19
-1D1380 BL sendShinePacket
+1D1380 BL warpPlayer
 
 //Shine::exeWaitRequestDemo
+// Get new shine
 1D14C8 MOV X1, X19
-1D14D0 BL sendShinePacket
+1D14D0 BL warpPlayer
 
 //Shine::receiveMsg
+// Get ghost shine
 1D0188 MOV X1, X19
-1D0190 BL sendShinePacket
+1D0190 BL warpPlayer
 
 //Shine::getDirect
 1CF124 MOV X1, X19
-1CF12C BL sendShinePacket
+1CF12C BL warpPlayer
 
 1CEEDC BL registerShineToList
 
