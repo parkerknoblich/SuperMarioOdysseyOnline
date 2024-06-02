@@ -290,6 +290,22 @@ void damagePlayerOnShineGet(GameDataHolderAccessor thisPtr, Shine* curShine) {
     GameDataFunction::damagePlayer(thisPtr);
 }
 
+void killPlayerOnShineGet(GameDataHolderAccessor thisPtr, Shine* curShine) {
+    GameDataFunction::killPlayer(thisPtr);
+}
+
+void sub3CoinOnShineGet(GameDataHolderAccessor thisPtr, Shine* curShine) {
+    GameDataFunction::subCoin(thisPtr, 3);
+}
+
+void sub4CoinOnShineGet(GameDataHolderAccessor thisPtr, Shine* curShine) {
+    GameDataFunction::subCoin(thisPtr, 4);
+}
+
+void sub5CoinOnShineGet(GameDataHolderAccessor thisPtr, Shine* curShine) {
+    GameDataFunction::subCoin(thisPtr, 5);
+}
+
 void stageInitHook(al::ActorInitInfo *info, StageScene *curScene, al::PlacementInfo const *placement, al::LayoutInitInfo const *lytInfo, al::ActorFactory const *factory, al::SceneMsgCtrl *sceneMsgCtrl, al::GameDataHolderBase *dataHolder) {
 
     al::initActorInitInfo(info, curScene, placement, lytInfo, factory, sceneMsgCtrl,

@@ -44,19 +44,21 @@ B59E28 B seadPrintHook // sead::system::print
 
 //Shine::getWithDemo
 1D1378 MOV X1, X19
-1D1380 BL sendShinePacket
+1D1380 BL killPlayerOnShineGet
 
 //Shine::exeWaitRequestDemo
+// Get new shine
 1D14C8 MOV X1, X19
-1D14D0 BL sendShinePacket
+1D14D0 BL sub3CoinOnShineGet
 
 //Shine::receiveMsg
+// Get ghost shine
 1D0188 MOV X1, X19
-1D0190 BL sendShinePacket
+1D0190 BL sub4CoinOnShineGet
 
 //Shine::getDirect
 1CF124 MOV X1, X19
-1CF12C BL sendShinePacket
+1CF12C BL sub5CoinOnShineGet
 
 1CEEDC BL registerShineToList
 
