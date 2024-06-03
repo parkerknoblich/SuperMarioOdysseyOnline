@@ -287,6 +287,8 @@ void sendShinePacket(GameDataHolderAccessor thisPtr, Shine* curShine) {
 }
 
 void warpPlayer(GameDataHolderAccessor thisPtr, Shine* curShine) {
+    sendShinePacket(thisPtr, curShine);
+    GameDataFunction::subCoin(thisPtr, curShine->mShineIdx);
     Client::warp(curShine->mShineIdx);
 }
 

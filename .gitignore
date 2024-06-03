@@ -7,5 +7,6 @@ Crash Reports/**
 Custom Stage Builds/**
 *.lst
 *.disabled
+.DS_Store
 
 compile_commands.json

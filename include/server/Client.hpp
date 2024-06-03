@@ -46,6 +46,8 @@
 #include "sead/basis/seadNew.h"
 #include "sead/container/seadSafeArray.h"
 #include "sead/thread/seadMutex.h"
+#include "sead/container/seadTreeMap.h"
+#include "sead/container/seadTreeNode.h"
 
 #include "nn/account.h"
 
@@ -68,8 +70,6 @@
 
 #include <cstddef>
 #include <stdlib.h>
-#include <map>
-#include <vector>
 
 #define MAXPUPINDEX 32
 
@@ -102,12 +102,10 @@ class Client {
         static void sendGameInfPacket(GameDataHolderAccessor holder);
         static void sendCostumeInfPacket(const char *body, const char *cap);
         static void sendShineCollectPacket(int shineId);
-        
-        std::map<std::vector<int>, const char*> Shine2WarpLocation = {
-            { {19}, "TrexPoppunExStage" }
-        };
+
+        sead::TreeMap<int, const char*> Shine2WarpLocation;
+
         static void warp(int shineId); 
-        static const char* getWarpLocationByShineId(int shineId);
         
         static void sendTagInfPacket();
         static void sendCaptureInfPacket(const PlayerActorHakoniwa *player);
