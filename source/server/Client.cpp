@@ -62,6 +62,7 @@ Client::Client() {
 
     Logger::log("%s Build Number: %s\n", playerName.name, TOSTRING(BUILDVERSTR));
 
+    Shine2WarpLocation.allocBuffer(16, mHeap);
     Shine2WarpLocation.insert(33, "TrexPoppunExStage");
 }
 
@@ -985,18 +986,17 @@ void Client::sendToStage(ChangeStagePacket* packet) {
 }
 
 void Client::warp(int shineId) {
-    sInstance->Shine2WarpLocation.insert(33, "TrexPoppunExStage");
     
     if (sInstance->mSceneInfo && sInstance->mSceneInfo->mSceneObjHolder) {
-        sead::TreeMap<int, const char*>::Node* warpLocationNode = sInstance->Shine2WarpLocation.startIterating();
-        // sead::TreeMap<int, const char*>::Node* warpLocationNode = sInstance->Shine2WarpLocation.find(shineId);
+        auto warpLocationNode = sInstance->Shine2WarpLocation.find(shineId);
+
         if (warpLocationNode != nullptr) {
-            const char* warpLocation = warpLocationNode->value();
+            auto warpLocation = warpLocationNode->value();
             GameDataHolderAccessor accessor(sInstance->mSceneInfo->mSceneObjHolder);
             ChangeStageInfo info(accessor.mData, "", warpLocation, false, 2, static_cast<ChangeStageInfo::SubScenarioType>(0));
             GameDataFunction::tryChangeNextStage(accessor, &info);
         } else {
-            const char* warpLocation = "WanwanClashExStage";
+            auto warpLocation = "WanwanClashExStage";
             GameDataHolderAccessor accessor(sInstance->mSceneInfo->mSceneObjHolder);
             ChangeStageInfo info(accessor.mData, "", warpLocation, false, 2, static_cast<ChangeStageInfo::SubScenarioType>(0));
             GameDataFunction::tryChangeNextStage(accessor, &info);
