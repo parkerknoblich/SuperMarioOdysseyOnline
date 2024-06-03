@@ -983,11 +983,24 @@ void Client::sendToStage(ChangeStagePacket* packet) {
     }
 }
 
-void Client::warp() {
+const char* Client::getWarpLocationByShineId(int shineId) {
+    for (const auto& entry : sInstance->Shine2WarpLocation) {
+        const std::vector<int>& keys = entry.first;
+        if (std::find(keys.begin(), keys.end(), shineId) != keys.end()) {
+            return entry.second;
+        }
+    }
+    return "";
+}
+
+void Client::warp(int shineId) {
     if (sInstance->mSceneInfo && sInstance->mSceneInfo->mSceneObjHolder) {
-        GameDataHolderAccessor accessor(sInstance->mSceneInfo->mSceneObjHolder);
-        ChangeStageInfo info(accessor.mData, "", "TrexPoppunExStage", false, 2, static_cast<ChangeStageInfo::SubScenarioType>(0));
-        GameDataFunction::tryChangeNextStage(accessor, &info);
+        const char* warpLocation = sInstance->getWarpLocationByShineId(shineId);
+        if (warpLocation[0] != '\0') {
+            GameDataHolderAccessor accessor(sInstance->mSceneInfo->mSceneObjHolder);
+            ChangeStageInfo info(accessor.mData, "", warpLocation, false, 2, static_cast<ChangeStageInfo::SubScenarioType>(0));
+            GameDataFunction::tryChangeNextStage(accessor, &info);
+        }
     }
 }
 

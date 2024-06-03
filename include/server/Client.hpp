@@ -68,6 +68,8 @@
 
 #include <cstddef>
 #include <stdlib.h>
+#include <map>
+#include <vector>
 
 #define MAXPUPINDEX 32
 
@@ -100,7 +102,13 @@ class Client {
         static void sendGameInfPacket(GameDataHolderAccessor holder);
         static void sendCostumeInfPacket(const char *body, const char *cap);
         static void sendShineCollectPacket(int shineId);
-        static void warp(); 
+        
+        std::map<std::vector<int>, const char*> Shine2WarpLocation = {
+            { {19}, "TrexPoppunExStage" }
+        };
+        static void warp(int shineId); 
+        static const char* getWarpLocationByShineId(int shineId);
+        
         static void sendTagInfPacket();
         static void sendCaptureInfPacket(const PlayerActorHakoniwa *player);
         void resendInitPackets();

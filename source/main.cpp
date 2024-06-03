@@ -287,7 +287,7 @@ void sendShinePacket(GameDataHolderAccessor thisPtr, Shine* curShine) {
 }
 
 void warpPlayer(GameDataHolderAccessor thisPtr, Shine* curShine) {
-    Client::warp();
+    Client::warp(curShine->mShineIdx);
 }
 
 void stageInitHook(al::ActorInitInfo *info, StageScene *curScene, al::PlacementInfo const *placement, al::LayoutInitInfo const *lytInfo, al::ActorFactory const *factory, al::SceneMsgCtrl *sceneMsgCtrl, al::GameDataHolderBase *dataHolder) {
