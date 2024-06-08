@@ -62,6 +62,8 @@ Client::Client() {
 
     Logger::log("%s Build Number: %s\n", playerName.name, TOSTRING(BUILDVERSTR));
 
+    debugAmount = 0;
+    debugCounter = 0;
 }
 
 /**
@@ -1210,6 +1212,25 @@ void Client::removeShine(int shineId) {
             collectedShineCount--;
         }
     }
+}
+
+void Client::setDebugAmount(int n) {
+    if (sInstance) {
+        if (sInstance->debugAmount == n) {
+            sInstance->debugCounter += 1;
+        } else {
+            sInstance->debugCounter = 1;
+        }
+        sInstance->debugAmount = n;
+    }
+}
+
+int Client::getDebugAmount() {
+    return sInstance ? sInstance->debugAmount : -1;
+}
+
+int Client::getDebugCounter() {
+    return sInstance ? sInstance->debugCounter : -1;
 }
 
 /**

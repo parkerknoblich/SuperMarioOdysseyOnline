@@ -184,7 +184,14 @@ class Client {
         // public for debug purposes
         SocketClient *mSocket;
 
+        static void setDebugAmount(int n);
+        static int getDebugAmount();
+        static int getDebugCounter();
+
     private:
+        int debugAmount;
+        int debugCounter;
+
         void updatePlayerInfo(PlayerInf *packet);
         void updateHackCapInfo(HackCapInf *packet);
         void updateGameInfo(GameInf *packet);
