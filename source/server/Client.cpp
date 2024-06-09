@@ -257,6 +257,43 @@ bool Client::openKeyboardPort() {
     return isFirstConnect;
 }
 
+/**
+ * @brief Opens up OS's software keyboard in order to change the currently used randomizer seed.
+ * @returns whether or not a new seed has been defined and needs to be saved.
+ */
+bool Client::openKeyboardSeed() {
+
+    if (!sInstance) {
+        Logger::log("Static Instance is null!\n");
+        return false;
+    }
+
+    // opens swkbd with the initial text set to the last saved randomizer seed
+    char buf[7];
+    nn::util::SNPrintf(buf, 7, "%u", sInstance->mRandomizerSeed);
+
+    sInstance->mKeyboard->openKeyboard(buf, [](nn::swkbd::KeyboardConfig& config) {
+        config.keyboardMode = nn::swkbd::KeyboardMode::ModeNumeric;
+        config.textMaxLength = 6;
+        config.textMinLength = 6;
+        config.isUseUtf8 = true;
+        config.inputFormMode = nn::swkbd::InputFormMode::OneLine;
+    });
+
+    int prevSeed = sInstance->mRandomizerSeed;
+
+    while (true) {
+        if (sInstance->mKeyboard->isThreadDone()) {
+            if(!sInstance->mKeyboard->isKeyboardCancelled())
+                sInstance->mRandomizerSeed = ::atoi(sInstance->mKeyboard->getResult());
+            break;
+        }
+        nn::os::YieldThread(); // allow other threads to run
+    }
+
+    return prevSeed != sInstance->mRandomizerSeed;
+}
+
 
 void Client::showUIMessage(const char16_t* msg) {
     if (!sInstance) {
@@ -1386,6 +1423,13 @@ const int Client::getCurrentPort() {
     return -1;
 }
 
+const int Client::getRandomizerSeed() {
+    if (sInstance) {
+        return sInstance->mRandomizerSeed;
+    }
+    return -1;
+}
+
 /**
  * @brief sets server IP to supplied string, used specifically for loading IP from the save file.
  * 
@@ -1405,6 +1449,12 @@ void Client::setLastUsedIP(const char* ip) {
 void Client::setLastUsedPort(const int port) {
     if (sInstance) {
         sInstance->mServerPort = port;
+    }
+}
+
+void Client::setLastUsedSeed(const int seed) {
+    if (sInstance) {
+        sInstance->mRandomizerSeed = seed;
     }
 }
 

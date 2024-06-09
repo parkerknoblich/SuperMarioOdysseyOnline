@@ -37,6 +37,7 @@ void saveWriteHook(al::ByamlWriter* saveByml) {
 
     const char *serverIP = Client::getCurrentIP();
     const int serverPort = Client::getCurrentPort();
+    const int randomizerSeed = Client::getRandomizerSeed();
 
     if (serverIP) {
         saveByml->addString("ServerIP", serverIP);
@@ -50,6 +51,12 @@ void saveWriteHook(al::ByamlWriter* saveByml) {
         saveByml->addInt("ServerPort", 0);
     }
 
+    if (randomizerSeed) {
+        saveByml->addInt("RandomizerSeed", randomizerSeed);
+    } else {
+        saveByml->addInt("RandomizerSeed", 0);
+    }
+
     saveByml->pop();
 }
 
@@ -57,6 +64,7 @@ bool saveReadHook(int* padRumbleInt, al::ByamlIter const& saveByml, char const* 
 
     const char *serverIP = "";
     int serverPort = 0;
+    int randomizerSeed = 0;
 
     if (al::tryGetByamlString(&serverIP, saveByml, "ServerIP")) {
         Client::setLastUsedIP(serverIP);
@@ -64,6 +72,10 @@ bool saveReadHook(int* padRumbleInt, al::ByamlIter const& saveByml, char const* 
 
     if (al::tryGetByamlS32(&serverPort, saveByml, "ServerPort")) {
         Client::setLastUsedPort(serverPort);
+    }
+
+    if (al::tryGetByamlS32(&randomizerSeed, saveByml, "RandomizerSeed")) {
+        Client::setLastUsedSeed(randomizerSeed);
     }
     
     return al::tryGetByamlS32(padRumbleInt, saveByml, padRumbleKey);

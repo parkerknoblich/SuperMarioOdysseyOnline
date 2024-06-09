@@ -41,15 +41,16 @@ StageSceneStateServerConfig::StageSceneStateServerConfig(const char *name, al::S
 
     mMainOptionsList->unkInt1 = 1;
 
-    mMainOptionsList->initDataNoResetSelected(4);
+    mMainOptionsList->initDataNoResetSelected(5);
 
-    sead::SafeArray<sead::WFixedSafeString<0x200>, 4>* mainMenuOptions =
-        new sead::SafeArray<sead::WFixedSafeString<0x200>, 4>();
+    sead::SafeArray<sead::WFixedSafeString<0x200>, 5>* mainMenuOptions =
+        new sead::SafeArray<sead::WFixedSafeString<0x200>, 5>();
 
     mainMenuOptions->mBuffer[ServerConfigOption::GAMEMODECONFIG].copy(u"Gamemode Config");
     mainMenuOptions->mBuffer[ServerConfigOption::GAMEMODESWITCH].copy(u"Change Gamemode");
     mainMenuOptions->mBuffer[ServerConfigOption::SETIP].copy(u"Change Server IP");
     mainMenuOptions->mBuffer[ServerConfigOption::SETPORT].copy(u"Change Server Port");
+    mainMenuOptions->mBuffer[ServerConfigOption::SETSEED].copy(u"Change Randomizer Seed");
 
     mMainOptionsList->addStringData(mainMenuOptions->mBuffer, "TxtContent");
 
@@ -187,6 +188,10 @@ void StageSceneStateServerConfig::exeMainMenu() {
             al::setNerve(this, &nrvStageSceneStateServerConfigOpenKeyboardPort);
             break;
         }
+        case ServerConfigOption::SETSEED: {
+            al::setNerve(this, &nrvStageSceneStateServerConfigOpenKeyboardSeed);
+            break;
+        }
         default:
             kill();
             break;
@@ -226,6 +231,25 @@ void StageSceneStateServerConfig::exeOpenKeyboardPort() {
         al::startHitReaction(mCurrentMenu, "リセット", 0);
         
         if(isSave) 
+            al::setNerve(this, &nrvStageSceneStateServerConfigSaveData);
+        else
+            al::setNerve(this, &nrvStageSceneStateServerConfigMainMenu);
+    }
+}
+
+void StageSceneStateServerConfig::exeOpenKeyboardSeed() {
+    if (al::isFirstStep(this)) {
+
+        mCurrentList->deactivate();
+
+        Client::getKeyboard()->setHeaderText(u"Set a Randomizer Seed Below.");
+        Client::getKeyboard()->setSubText(u"");
+
+        bool isSave = Client::openKeyboardSeed(); // anything that happens after this will be ran after the keyboard closes
+
+        al::startHitReaction(mCurrentMenu, "リセット", 0);
+
+        if(isSave)
             al::setNerve(this, &nrvStageSceneStateServerConfigSaveData);
         else
             al::setNerve(this, &nrvStageSceneStateServerConfigMainMenu);
@@ -344,6 +368,7 @@ namespace {
 NERVE_IMPL(StageSceneStateServerConfig, MainMenu)
 NERVE_IMPL(StageSceneStateServerConfig, OpenKeyboardIP)
 NERVE_IMPL(StageSceneStateServerConfig, OpenKeyboardPort)
+NERVE_IMPL(StageSceneStateServerConfig, OpenKeyboardSeed)
 NERVE_IMPL(StageSceneStateServerConfig, GamemodeConfig)
 NERVE_IMPL(StageSceneStateServerConfig, GamemodeSelect)
 NERVE_IMPL(StageSceneStateServerConfig, SaveData)
