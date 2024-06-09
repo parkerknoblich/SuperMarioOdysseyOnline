@@ -543,8 +543,22 @@ bool tryChangeNextStageHijack29(GameDataHolderWriter thisPtr, const ChangeStageI
 }
 
 void changeNextStageHijack(GameDataHolder *thisPtr, const ChangeStageInfo *changeStageInfo, int i, int n) {
-    Client::setDebugAmount(n);
-    thisPtr->changeNextStage(changeStageInfo, i);
+    if (changeStageInfo->changeStageName == "TrexPoppunExStage") {
+        Client::setDebugAmount(100);
+
+        ChangeStageInfo newChangeStageInfo(thisPtr,
+            "",
+            "WanwanClashExStage",
+            false,
+            -1,
+            ChangeStageInfo::SubScenarioType::UNK
+        );
+
+        thisPtr->changeNextStage(&newChangeStageInfo, i);
+    } else {
+        Client::setDebugAmount(n);
+        thisPtr->changeNextStage(changeStageInfo, i);
+    }
 }
 
 void changeNextStageHijack30(GameDataHolder *thisPtr, const ChangeStageInfo *changeStageInfo, int i) {
