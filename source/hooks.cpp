@@ -11,6 +11,7 @@
 #include "logger.hpp"
 #include "rs/util.hpp"
 #include "server/Client.hpp"
+#include "server/Randomizer.hpp"
 #include "al/byaml/ByamlIter.h"
 #include "al/util.hpp"
 #include "game/Actors/WorldEndBorderKeeper.h"
@@ -37,7 +38,7 @@ void saveWriteHook(al::ByamlWriter* saveByml) {
 
     const char *serverIP = Client::getCurrentIP();
     const int serverPort = Client::getCurrentPort();
-    const int randomizerSeed = Client::getRandomizerSeed();
+    const int randomizerSeed = Randomizer::getSeed();
 
     if (serverIP) {
         saveByml->addString("ServerIP", serverIP);
@@ -75,7 +76,7 @@ bool saveReadHook(int* padRumbleInt, al::ByamlIter const& saveByml, char const* 
     }
 
     if (al::tryGetByamlS32(&randomizerSeed, saveByml, "RandomizerSeed")) {
-        Client::setLastUsedSeed(randomizerSeed);
+        Randomizer::setLastUsedSeed(randomizerSeed);
     }
     
     return al::tryGetByamlS32(padRumbleInt, saveByml, padRumbleKey);

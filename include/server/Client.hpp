@@ -135,8 +135,6 @@ class Client {
 
         static const int getCurrentPort();
 
-        static const int getRandomizerSeed();
-
         static int getConnectCount() {
             if (sInstance)
                 return sInstance->mConnectCount;
@@ -163,8 +161,6 @@ class Client {
 
         static void setLastUsedPort(const int port);
 
-        static void setLastUsedSeed(const int seed);
-
         static void setTagState(bool state);
 
         static void setSceneInfo(const al::ActorInitInfo& initInfo, const StageScene *stageScene);
@@ -177,7 +173,6 @@ class Client {
 
         static bool openKeyboardIP();
         static bool openKeyboardPort();
-        static bool openKeyboardSeed();
 
         static void showUIMessage(const char16_t* msg);
         static void hideUIMessage();
@@ -189,14 +184,7 @@ class Client {
         // public for debug purposes
         SocketClient *mSocket;
 
-        static void setDebugAmount(int n);
-        static int getDebugAmount();
-        static int getDebugCounter();
-
     private:
-        int debugAmount;
-        int debugCounter;
-
         void updatePlayerInfo(PlayerInf *packet);
         void updateHackCapInfo(HackCapInf *packet);
         void updateGameInfo(GameInf *packet);
@@ -247,8 +235,6 @@ class Client {
         hostname mServerIP;
 
         int mServerPort = 0;
-
-        int mRandomizerSeed = 0;
 
         bool waitForGameInit = true;
         bool mIsFirstConnect = true;

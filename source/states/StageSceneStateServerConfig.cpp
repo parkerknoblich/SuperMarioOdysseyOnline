@@ -7,6 +7,7 @@
 #include "game/Layouts/CommonVerticalList.h"
 #include "game/SaveData/SaveDataAccessFunction.h"
 #include "server/Client.hpp"
+#include "server/Randomizer.hpp"
 #include "al/util.hpp"
 #include "al/util/NerveUtil.h"
 #include "container/seadPtrArray.h"
@@ -245,7 +246,7 @@ void StageSceneStateServerConfig::exeOpenKeyboardSeed() {
         Client::getKeyboard()->setHeaderText(u"Set a Randomizer Seed Below.");
         Client::getKeyboard()->setSubText(u"");
 
-        bool isSave = Client::openKeyboardSeed(); // anything that happens after this will be ran after the keyboard closes
+        bool isSave = Randomizer::openKeyboardSeed(); // anything that happens after this will be ran after the keyboard closes
 
         al::startHitReaction(mCurrentMenu, "リセット", 0);
 

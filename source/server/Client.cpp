@@ -61,9 +61,6 @@ Client::Client() {
     Logger::log("Player Name: %s\n", playerName.name);
 
     Logger::log("%s Build Number: %s\n", playerName.name, TOSTRING(BUILDVERSTR));
-
-    debugAmount = 0;
-    debugCounter = 0;
 }
 
 /**
@@ -255,43 +252,6 @@ bool Client::openKeyboardPort() {
     sInstance->mSocket->setIsFirstConn(isFirstConnect);
 
     return isFirstConnect;
-}
-
-/**
- * @brief Opens up OS's software keyboard in order to change the currently used randomizer seed.
- * @returns whether or not a new seed has been defined and needs to be saved.
- */
-bool Client::openKeyboardSeed() {
-
-    if (!sInstance) {
-        Logger::log("Static Instance is null!\n");
-        return false;
-    }
-
-    // opens swkbd with the initial text set to the last saved randomizer seed
-    char buf[7];
-    nn::util::SNPrintf(buf, 7, "%u", sInstance->mRandomizerSeed);
-
-    sInstance->mKeyboard->openKeyboard(buf, [](nn::swkbd::KeyboardConfig& config) {
-        config.keyboardMode = nn::swkbd::KeyboardMode::ModeNumeric;
-        config.textMaxLength = 6;
-        config.textMinLength = 6;
-        config.isUseUtf8 = true;
-        config.inputFormMode = nn::swkbd::InputFormMode::OneLine;
-    });
-
-    int prevSeed = sInstance->mRandomizerSeed;
-
-    while (true) {
-        if (sInstance->mKeyboard->isThreadDone()) {
-            if(!sInstance->mKeyboard->isKeyboardCancelled())
-                sInstance->mRandomizerSeed = ::atoi(sInstance->mKeyboard->getResult());
-            break;
-        }
-        nn::os::YieldThread(); // allow other threads to run
-    }
-
-    return prevSeed != sInstance->mRandomizerSeed;
 }
 
 
@@ -1251,25 +1211,6 @@ void Client::removeShine(int shineId) {
     }
 }
 
-void Client::setDebugAmount(int n) {
-    if (sInstance) {
-        if (sInstance->debugAmount == n) {
-            sInstance->debugCounter += 1;
-        } else {
-            sInstance->debugCounter = 1;
-        }
-        sInstance->debugAmount = n;
-    }
-}
-
-int Client::getDebugAmount() {
-    return sInstance ? sInstance->debugAmount : -1;
-}
-
-int Client::getDebugCounter() {
-    return sInstance ? sInstance->debugCounter : -1;
-}
-
 /**
  * @brief 
  * 
@@ -1423,13 +1364,6 @@ const int Client::getCurrentPort() {
     return -1;
 }
 
-const int Client::getRandomizerSeed() {
-    if (sInstance) {
-        return sInstance->mRandomizerSeed;
-    }
-    return -1;
-}
-
 /**
  * @brief sets server IP to supplied string, used specifically for loading IP from the save file.
  * 
@@ -1449,12 +1383,6 @@ void Client::setLastUsedIP(const char* ip) {
 void Client::setLastUsedPort(const int port) {
     if (sInstance) {
         sInstance->mServerPort = port;
-    }
-}
-
-void Client::setLastUsedSeed(const int seed) {
-    if (sInstance) {
-        sInstance->mRandomizerSeed = seed;
     }
 }
 

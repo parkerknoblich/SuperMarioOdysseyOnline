@@ -34,6 +34,7 @@
 #include "server/gamemode/GameModeBase.hpp"
 #include "server/hns/HideAndSeekMode.hpp"
 #include "server/gamemode/GameModeManager.hpp"
+#include "server/Randomizer.hpp"
 
 static int pInfSendTimer = 0;
 static int gameInfSendTimer = 0;
@@ -188,7 +189,7 @@ void drawMainHook(HakoniwaSequence *curSequence, sead::Viewport *viewport, sead:
                                 gTextWriter->printf("Current Animation: %s\n", al::getActionName(curModel));
                             }
                         }
-                        gTextWriter->printf("Debug Amount: %d (%d)\n", Client::getDebugAmount(), Client::getDebugCounter());
+                        gTextWriter->printf("Debug Amount: %d (%d)\n", Randomizer::getDebugAmount(), Randomizer::getDebugCounter());
                     }
                 }
             }
@@ -324,6 +325,7 @@ ulong constructHook() {  // hook for constructing anything we need to globally b
 
     Client::createInstance(al::getCurrentHeap());
     GameModeManager::createInstance(al::getCurrentHeap()); // Create the GameModeManager on the current al heap
+    Randomizer::createInstance(al::getCurrentHeap());
 
     return 0x20;
 }
@@ -451,7 +453,7 @@ void seadPrintHook(const char *fmt, ...)
 
 void changeNextStageHijack(GameDataHolder *thisPtr, const ChangeStageInfo *changeStageInfo, int i, int n) {
     if (changeStageInfo->changeStageName == "TrexPoppunExStage") {
-        Client::setDebugAmount(100);
+        Randomizer::setDebugAmount(100);
 
         ChangeStageInfo newChangeStageInfo(thisPtr,
             "",
@@ -463,7 +465,7 @@ void changeNextStageHijack(GameDataHolder *thisPtr, const ChangeStageInfo *chang
 
         thisPtr->changeNextStage(&newChangeStageInfo, i);
     } else {
-        Client::setDebugAmount(n);
+        Randomizer::setDebugAmount(n);
         thisPtr->changeNextStage(changeStageInfo, i);
     }
 }
