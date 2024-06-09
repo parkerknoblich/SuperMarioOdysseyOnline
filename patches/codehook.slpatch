@@ -37,44 +37,14 @@ B59E28 B seadPrintHook // sead::system::print
 
 // Test
 
-8bbcc BL tryChangeNextStageHijack1
-8bd38 BL tryChangeNextStageHijack2
-8bd8c BL tryChangeNextStageHijack3
-8bf00 BL tryChangeNextStageHijack4
-8bf58 BL tryChangeNextStageHijack5
-1b3484 BL tryChangeNextStageHijack6
-1d0870 BL tryChangeNextStageHijack7
-1d2f08 BL tryChangeNextStageHijack8
-219c10 BL tryChangeNextStageHijack9
-219d7c BL tryChangeNextStageHijack10
-219f34 BL tryChangeNextStageHijack11
-25e1e0 BL tryChangeNextStageHijack12
-25e708 BL tryChangeNextStageHijack13 // Leaving metro power
-25fc88 BL tryChangeNextStageHijack14
-262e3c BL tryChangeNextStageHijack15
-2c5fdc BL tryChangeNextStageHijack16
-2c6018 BL tryChangeNextStageHijack17
-2c6454 BL tryChangeNextStageHijack18
-2e05d8 BL tryChangeNextStageHijack19
-307cc8 BL tryChangeNextStageHijack20
-30ce4c BL tryChangeNextStageHijack21
-30cf50 BL tryChangeNextStageHijack22
-318f14 BL tryChangeNextStageHijack23
-319f40 BL tryChangeNextStageHijack24
-37ab28 BL tryChangeNextStageHijack25
-3c6068 BL tryChangeNextStageHijack26
-504838 BL tryChangeNextStageHijack27
-504bfc BL tryChangeNextStageHijack28
-51003c BL tryChangeNextStageHijack29
-
-51e864 BL changeNextStageHijack30
-// 527a74 BL changeNextStageHijack31 // Chain chomp room (pipe), entering Odyssey, Flooded Pipes, Rocket, entering Shop, leaving Shiveria, capless room
-527abc BL changeNextStageHijack32 // Koopa free-running (enter & exit)
-527b00 BL changeNextStageHijack33
-527b7c BL changeNextStageHijack34
-527be0 BL changeNextStageHijack35
-527c3c BL changeNextStageHijack36
-527d0c BL changeNextStageHijack37 // Dino room triggered (door), leaving Odyssey, Deep Woods, leaving Shop, entering Shiveria
+51e864 BL changeNextStageHijack
+527a74 BL changeNextStageHijack // Chain chomp room (pipe), entering Odyssey, Flooded Pipes, Rocket, entering Shop, leaving Shiveria, capless room
+527abc BL changeNextStageHijack // Koopa free-running (enter & exit)
+527b00 BL changeNextStageHijack
+527b7c BL changeNextStageHijack
+527be0 BL changeNextStageHijack
+527c3c BL changeNextStageHijack
+527d0c BL changeNextStageHijack // Dino room triggered (door), leaving Odyssey, Deep Woods, leaving Shop, entering Shiveria
 
 // Shine Syncing
 // 1CF470 BL shineHook
