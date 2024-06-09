@@ -6,8 +6,15 @@
 SEAD_SINGLETON_DISPOSER_IMPL(Randomizer);
 
 Randomizer::Randomizer() {
+    mHeap = sead::ExpHeap::create(0x50000, "RandomizerHeap", sead::HeapMgr::instance()->getCurrentHeap(), 8, sead::Heap::cHeapDirection_Forward, false);
+
     mDebugAmount = 0;
     mDebugCounter = 0;
+
+    WarpMap.allocBuffer(16, mHeap);
+    int seed = Randomizer::getSeed();
+    sead::FixedSafeString<0x80> trexPoppunExStage("TrexPoppunExStage");
+    WarpMap.insert(trexPoppunExStage, "WanwanClashExStage");
 }
 
 const int Randomizer::getSeed() {
@@ -48,6 +55,24 @@ bool Randomizer::openKeyboardSeed() {
     }
 
     return prevSeed != sInstance->mSeed;
+}
+
+void Randomizer::warp(GameDataHolder *thisPtr, const ChangeStageInfo *changeStageInfo, int i) {
+    auto originalWarpLocation = changeStageInfo->changeStageName;
+    auto newWarpLocationNode = sInstance->WarpMap.find(originalWarpLocation);
+    if (newWarpLocationNode != nullptr) {
+        auto newWarpLocation = newWarpLocationNode->value();
+        ChangeStageInfo newChangeStageInfo(thisPtr,
+            "",
+            newWarpLocation,
+            false,
+            -1,
+            ChangeStageInfo::SubScenarioType::UNK
+        );
+        thisPtr->changeNextStage(&newChangeStageInfo, i);
+    } else {
+        thisPtr->changeNextStage(changeStageInfo, i);
+    }
 }
 
 void Randomizer::setDebugAmount(int n) {

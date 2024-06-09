@@ -981,6 +981,7 @@ void Client::sendToStage(ChangeStagePacket* packet) {
         GameDataFunction::tryChangeNextStage(accessor, &info);
     }
 }
+
 /**
  * @brief 
  * Send a udp holepunch packet to the server

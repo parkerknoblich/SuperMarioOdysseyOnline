@@ -452,20 +452,5 @@ void seadPrintHook(const char *fmt, ...)
 // ------------- Functions -------------
 
 void changeNextStageHijack(GameDataHolder *thisPtr, const ChangeStageInfo *changeStageInfo, int i, int n) {
-    if (changeStageInfo->changeStageName == "TrexPoppunExStage") {
-        Randomizer::setDebugAmount(100);
-
-        ChangeStageInfo newChangeStageInfo(thisPtr,
-            "",
-            "WanwanClashExStage",
-            false,
-            -1,
-            ChangeStageInfo::SubScenarioType::UNK
-        );
-
-        thisPtr->changeNextStage(&newChangeStageInfo, i);
-    } else {
-        Randomizer::setDebugAmount(n);
-        thisPtr->changeNextStage(changeStageInfo, i);
-    }
+    Randomizer::warp(thisPtr, changeStageInfo, i);
 }
