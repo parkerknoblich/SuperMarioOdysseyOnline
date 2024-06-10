@@ -12,6 +12,8 @@ class Randomizer {
     Randomizer();
 
 public:
+    static void init();
+
     static const int getSeed();
     static void setLastUsedSeed(const int seed);
     static bool openKeyboardSeed();
@@ -27,6 +29,7 @@ private:
     sead::ExpHeap *mHeap = nullptr;
 
     int mSeed;
+    static void randomize();
 
     int mDebugAmount;
     int mDebugCounter;

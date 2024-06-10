@@ -338,6 +338,8 @@ bool threadInit(HakoniwaSequence *mainSeq) {  // hook for initializing client cl
 
     Client::instance()->init(lytInfo, mainSeq->mGameDataHolder);
 
+    Randomizer::instance()->init();
+
     return GameDataFunction::isPlayDemoOpening(mainSeq->mGameDataHolder);
 }
 

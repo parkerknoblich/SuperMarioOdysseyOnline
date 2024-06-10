@@ -207,11 +207,11 @@ public:
     Node* startIterating() const { return static_cast<Node*>(MapImpl::startIterating()); }
     Node* nextNode(Node* node) const { return static_cast<Node*>(MapImpl::nextNode(node)); }
 
+    s32 mSize = 0;
 private:
     void eraseNodeForClear_(typename MapImpl::Node* node);
 
     FreeList mFreeList;
-    s32 mSize = 0;
     s32 mCapacity = 0;
 };
 

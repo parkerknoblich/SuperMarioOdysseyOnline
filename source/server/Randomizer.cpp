@@ -2,6 +2,7 @@
 #include "nn/util.h"
 #include "Keyboard.hpp"
 #include "server/Client.hpp"
+#include "sead/container/seadTList.h"
 
 SEAD_SINGLETON_DISPOSER_IMPL(Randomizer);
 
@@ -10,11 +11,10 @@ Randomizer::Randomizer() {
 
     mDebugAmount = 0;
     mDebugCounter = 0;
+}
 
-    WarpMap.allocBuffer(16, mHeap);
-    int seed = Randomizer::getSeed();
-    sead::FixedSafeString<0x80> trexPoppunExStage("TrexPoppunExStage");
-    WarpMap.insert(trexPoppunExStage, "WanwanClashExStage");
+void Randomizer::init() {
+    sInstance->WarpMap.allocBuffer(16, sInstance->mHeap);
 }
 
 const int Randomizer::getSeed() {
@@ -24,6 +24,9 @@ const int Randomizer::getSeed() {
 void Randomizer::setLastUsedSeed(const int seed) {
     if (sInstance) {
         sInstance->mSeed = seed;
+        // Note: this doesn't work on startup, need to manually set the
+        // seed to something different first
+        randomize();
     }
 }
 
@@ -54,7 +57,44 @@ bool Randomizer::openKeyboardSeed() {
         nn::os::YieldThread(); // allow other threads to run
     }
 
-    return prevSeed != sInstance->mSeed;
+    bool newSeed = prevSeed != sInstance->mSeed;
+
+    if (newSeed) {
+        randomize();
+    }
+
+    return newSeed;
+}
+
+void Randomizer::randomize() {
+    sead::ScopedCurrentHeapSetter heapSetter(sInstance->mHeap);
+
+    sead::TList<const char *> warpDestinations;
+    auto x1 = sead::TListNode("WanwanClashExStage");
+    warpDestinations.pushBack(&x1);
+    auto x2 = sead::TListNode("Lift2DExStage");
+    warpDestinations.pushBack(&x2);
+
+    auto seed = getSeed();
+    sead::Random x(seed);
+    warpDestinations.shuffle(&x);
+
+    auto first = warpDestinations.front();
+    if (first == nullptr) {
+        setDebugAmount(5);
+    } else {
+        setDebugAmount(6);
+
+        auto warpDest = first->mData;
+        if (warpDest == nullptr) {
+            setDebugAmount(8);
+        } else {
+            sInstance->WarpMap.clear();
+            sead::FixedSafeString<0x80> trexPoppunExStage("TrexPoppunExStage");
+            sInstance->WarpMap.insert(trexPoppunExStage, warpDest);
+            setDebugAmount(sInstance->WarpMap.mSize);
+        }
+    }
 }
 
 void Randomizer::warp(GameDataHolder *thisPtr, const ChangeStageInfo *changeStageInfo, int i) {
