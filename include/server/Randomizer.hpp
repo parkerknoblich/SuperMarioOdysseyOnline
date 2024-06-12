@@ -25,6 +25,10 @@ public:
     static int getDebugAmount();
     static int getDebugCounter();
 
+    static void setDebugString(sead::FixedSafeString<0x80> string);
+    static const char * getDebugString();
+    static int getDebugStringCounter();
+
 private:
     sead::ExpHeap *mHeap = nullptr;
 
@@ -33,4 +37,7 @@ private:
 
     int mDebugAmount;
     int mDebugCounter;
+    
+    sead::FixedSafeString<0x80> mDebugString;
+    int mDebugStringCounter;
 };

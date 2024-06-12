@@ -190,6 +190,12 @@ void drawMainHook(HakoniwaSequence *curSequence, sead::Viewport *viewport, sead:
                             }
                         }
                         gTextWriter->printf("Debug Amount: %d (%d)\n", Randomizer::getDebugAmount(), Randomizer::getDebugCounter());
+                        
+                        auto debugString = Randomizer::getDebugString();
+                        if (debugString == nullptr) {
+                            debugString = "N/A";
+                        }
+                        gTextWriter->printf("Debug String: \"%s\" (%d)", debugString, Randomizer::getDebugStringCounter());
                     }
                 }
             }

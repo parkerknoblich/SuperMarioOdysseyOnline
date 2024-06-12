@@ -98,6 +98,8 @@ void Randomizer::randomize() {
 }
 
 void Randomizer::warp(GameDataHolder *thisPtr, const ChangeStageInfo *changeStageInfo, int i) {
+    setDebugString(sead::FixedSafeString<0x80>(changeStageInfo->changeStageId));
+
     auto originalWarpLocation = changeStageInfo->changeStageName;
     auto newWarpLocationNode = sInstance->WarpMap.find(originalWarpLocation);
     if (newWarpLocationNode != nullptr) {
@@ -132,4 +134,27 @@ int Randomizer::getDebugAmount() {
 
 int Randomizer::getDebugCounter() {
     return sInstance ? sInstance->mDebugCounter : -1;
+}
+
+void Randomizer::setDebugString(sead::FixedSafeString<0x80> string) {
+    if (sInstance) {
+        if (sInstance->mDebugString == string) {
+            sInstance->mDebugStringCounter += 1;
+        } else {
+            sInstance->mDebugStringCounter = 1;
+        }
+        sInstance->mDebugString = string;
+    }
+}
+
+const char * Randomizer::getDebugString() {
+    if (sInstance) {
+        return sInstance->mDebugString.cstr();
+    } else {
+        return nullptr;
+    }
+}
+
+int Randomizer::getDebugStringCounter() {
+    return sInstance ? sInstance->mDebugStringCounter : -1;
 }
