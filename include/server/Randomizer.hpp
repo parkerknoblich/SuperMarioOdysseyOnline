@@ -43,320 +43,300 @@ private:
 };
 
 // Cap
-//     CapWorldTowerStage
-//         Bottom Entrance/Exit = Ex
-//         Top Entrance/Exit = Goal
-//     FrogSearchExStage
-//         Entrance/Exit = FrogSearchExStageEnt
-//     PoisonWaveExStage
-//         Entrance = PoisonWaveExEnt
-//         Exit = PoisonWaveExExit
-//     PushBlockExStage
-//         Entrance = PushBlockExStageEnt
-//         Exit = PushBlockExStageEntDokan
-//     RollingExStage
-//         Entrance = rollingstart
-//         Exit = rollinggoal
+// 	(Multi-Way) CapWorldHomeStage
+// 		CapWorldTowerStage
+// 			Bottom = Ex
+// 	    	Top = Goal
+// 		FrogSearchExStage = FrogSearchExStageEnt
+// 		PoisonWaveExStage = PoisonWaveExExit
+// 		PushBlockExStage = PushBlockExStageEntDokan
+// 		RollingExStage = rollinggoal
+// 	(Multi-Way) CapWorldTowerStage
+// 		Bottom = Ex
+// 		Top = Goal
+// 	(One-Way) FrogSearchExStage = FrogSearchExStageEnt
+// 	(Multi-Way) PoisonWaveExStage = PoisonWaveExEnt
+//     (Multi-Way) PushBlockExStage = PushBlockExStageEnt
+//     (Multi-Way) RollingExStage = rollingstart
 
 // Cascade
-//     TrexPoppunExStage
-//         Entrance/Exit = RexPoppunEx
-//     Lift2DExStage
-//         Entrance = Lift2D
-//         Exit = Lift2DExit
-//     WanwanClashExStage
-//         Entrance = WanwanExStart
-//         Exit = WanwanExGoal
-//     CapAppearExStage
-//         Entrance = CapAppearExEnt
-//         Exit = CapAppearExExit
-//     WindBlowExStage
-//         Entrance = WindBlowExStart
-//         Exit = WindBlowExGoal
+// 	(Multi-Way) WaterfallWorldHomeStage
+// 		TrexPoppunExStage = RexPoppunEx
+// 		Lift2DExStage = Lift2DExit
+// 		WanwanClashExStage = WanwanExGoal
+// 		CapAppearExStage = CapAppearExExit
+// 		WindBlowExStage = WindBlowExGoal
+// 	(One-Way) TrexPoppunExStage = RexPoppunEx
+//     (Multi-Way) Lift2DExStage = Lift2D
+//     (Multi-Way) WanwanClashExStage = WanwanExStart
+//     (Multi-Way) CapAppearExStage = CapAppearExEnt
+//     (Multi-Way) WindBlowExStage = WindBlowExStart
 
 // Sand
-//     SandWorldShopStage
-//         Front Entrance = bar1
-//         Back Entrance = bar2
-//     SandWorldSlotStage
-//         Entrance/Exit = town
-//     SandWorldVibrationStage
-//         Entrance/Exit = shindo
-//     SandWorldSecretStage
-//         Entrance/Exit = hide
-//     SandWorldMeganeExStage
-//         Entrance = wall
-//         Exit = anki2
-//     SandWorldKillerExStage
-//         Entrance = doukutu1
-//         Exit = doukutu2
-//     SandWorldPressExStage
-//         Entrance = arijigoku1
-//         Exit = arijigoku2
-//     SandWorldSphinxExStage
-//         Entrance = run00
-//         Exit = run00return
-//     SandWorldCostumeStage
-//         Entrance/Exit = abc
-//     SandWorldPyramid000Stage
-//         Entrance = pyramid01
-//         Exit = pyramid02
-//     SandWorldPyramid001Stage
-//         Entrance = pyramid03
-//         Exit = pyramid04
-//     SandWorldUnderground000Stage
-//         Entrance = icestart
-//         Leave from Entrance = Under01
-//     SandWorldUnderground001Stage
-//         Entrance = Yadokari00
-//         Exit = Out
-//     SandWorldRotateExStage
-//         Entrance = biru
-//         Exit = birureturn
-//     MeganeLiftExStage
-//         Entrance = meganelift01
-//         Exit = meganelift02
-//     RocketFlowerExStage
-//         Entrance/Exit = rocket
-//     WaterTubeExStage
-//         Entrance = EX_2DHosui
-//         Exit = EX_2DHosui_Exit
+// 	(Multi-Way) SandWorldHomeStage
+// 		SandWorldShopStage
+//             Front = bar1
+//             Back = bar2
+// 		SandWorldSlotStage = town
+// 		SandWorldVibrationStage = shindo
+// 		SandWorldSecretStage = hide
+// 		SandWorldMeganeExStage = anki2
+// 		SandWorldKillerExStage = doukutu2
+// 		SandWorldPressExStage = arijigoku2
+// 		SandWorldSphinxExStage = run00return
+// 		SandWorldCostumeStage = abc
+// 		SandWorldPyramid000Stage = pyramid02
+// 		SandWorldPyramid001Stage = pyramid04
+// 		SandWorldUnderground000Stage = Under01
+// 		SandWorldUnderground001Stage = Out
+// 		SandWorldRotateExStage = birureturn
+// 		MeganeLiftExStage = meganelift02
+// 		RocketFlowerExStage = rocket
+// 		WaterTubeExStage = EX_2DHosui_Exit
+//     (One-Way) SandWorldShopStage
+//         Front = bar1
+//         Back = bar2
+//     (One-Way) SandWorldSlotStage = town
+//     (One-Way) SandWorldVibrationStage = shindo
+//     (One-Way) SandWorldSecretStage = hide
+//     (Multi-Way) SandWorldMeganeExStage = wall
+//     (Multi-Way) SandWorldKillerExStage = doukutu1
+//     (Multi-Way) SandWorldPressExStage = arijigoku1
+//     (Multi-Way) SandWorldSphinxExStage = run00
+//     (One-Way) SandWorldCostumeStage = abc
+//     (Multi-Way) SandWorldPyramid000Stage = pyramid01
+//     (Multi-Way) SandWorldPyramid001Stage = pyramid03
+//     (Multi-Way) SandWorldUnderground000Stage = icestart
+//     (Multi-Way) SandWorldUnderground001Stage = Yadokari00
+//     (Multi-Way) SandWorldRotateExStage = biru
+//     (Multi-Way) MeganeLiftExStage = meganelift01
+//     (One-Way) RocketFlowerExStage = rocket
+//     (Multi-Way) WaterTubeExStage = EX_2DHosui
 
 // Lake
-//     LakeWorldShopStage
-//         Entrance/Exit = LakeWorldShop
-//     FastenerExStage
-//         Entrance/Exit = FastenerEx
-//     TrampolineWallCatchExStage
-//         Entrance = CapTrampolineA
-//         Exit = CapTrampolineB
-//     GotogotonExStage
-//         Entrance/Exit = Goton
-//     FrogPoisonExStage
-//         Entrance = LakeWorldMoonEX1a
-//         Exit = LakeWorldMoonEX1b
+// 	(Multi-Way) LakeWorldHomeStage
+// 		LakeWorldShopStage = LakeWorldShop
+// 		FastenerExStage = FastenerEx
+// 		TrampolineWallCatchExStage = CapTrampolineB
+// 		GotogotonExStage = Goton
+// 		FrogPoisonExStage = LakeWorldMoonEX1b
+//     (One-Way) LakeWorldShopStage = LakeWorldShop
+//     (One-Way) FastenerExStage = FastenerEx
+//     (Multi-Way) TrampolineWallCatchExStage = CapTrampolineA
+//     (One-Way) GotogotonExStage = Goton
+//     (Multi-Way) FrogPoisonExStage = LakeWorldMoonEX1a
 
 // Wooded
-//     ForestWorldWaterExStage
-//         Entrance = EX_Water
-//         Exit = EX_Water_Exit
-//     ForestWorldTowerStage
-//         Bottom Entrance/Exit = Tower001
-//         Top Entrance/Exit = Tower002
-//     ForestWorldBossStage
-//         Entrance = boss001
-//         Exit = boss002
-//     ForestWorldBonusStage
-//         Entrance = bonus1
-//         Exit = bonus2
-//     ForestWorldCloudBonusExStage
-//         Entrance = EXCloud
-//         Exit = EXCloud
-//     FogMountainExStage
-//         Entrance/Exit = EX_Mist
-//     RailCollisionExStage
-//         Entrance = EX_RailCollision_Exit
-//         Exit = EX_RailCollision
-//     ShootingElevatorExStage
-//         Entrance = EX_Tankuro
-//         Exit = EX_Tankuro_Exit
-//     ForestWorldWoodsStage
-//         Entrance near Odyssey = Jyukai001 (also Jyukai002v)
-//         Exit near Odyssey = Jyukai001v
-//         Exit near Firebro = Jyukai002
-//         Entrance near Talkatoo = Jyukai003
-//         Exit near Talkatoo = Jyukai003v
-//     ForestWorldWoodsTreasureStage
-//         Entrance/Exit = TreasureTree
-//     ForestWorldWoodsCostumeStage
-//         Entrance/Exit = Explorer_Bonus
-//     PackunPoisonExStage
-//         Entrance = PoisonEx
-//         Exit = PoisonEx_Exit
-//     AnimalChaseExStage
-//         Entrance/Exit = EX_AnimalChase
-//     KillerRoadExStage
-//         Entrance/Exit = KillerRoad
+// 	(Multi-Way) ForestWorldHomeStage
+// 		ForestWorldWaterExStage = EX_Water_Exit
+// 		ForestWorldTowerStage
+// 			Bottom = Tower001
+// 			Top = Tower002
+// 		ForestWorldBossStage = boss002
+// 		ForestWorldBonusStage = bonus2
+// 		ForestWorldCloudBonusExStage = EXCloud
+// 		FogMountainExStage = EX_Mist
+// 		RailCollisionExStage = EX_RailCollision_Exit
+// 		ShootingElevatorExStage = EX_Tankuro_Exit
+// 		ForestWorldWoodsStage
+// 			Near Odyssey = Jyukai001v
+// 			Near Firebro = Jyukai002
+// 			Near Talkatoo = Jyukai003v
+// 		ForestWorldWoodsTreasureStage = TreasureTree
+// 		ForestWorldWoodsCostumeStage = Explorer_Bonus
+// 		PackunPoisonExStage = PoisonEx_Exit
+// 		AnimalChaseExStage = EX_AnimalChase
+// 		KillerRoadExStage = KillerRoad
+//     (Multi-Way) ForestWorldWaterExStage = EX_Water
+//     (Multi-Way) ForestWorldTowerStage
+//         Bottom = Tower001
+//         Top = Tower002
+//     (Multi-Way) ForestWorldBossStage = boss001
+//     (Multi-Way) ForestWorldBonusStage = bonus1
+//     (One-Way) ForestWorldCloudBonusExStage = EXCloud
+//     (One-Way) FogMountainExStage = EX_Mist
+//     (Multi-Way) RailCollisionExStage = EX_RailCollision
+//     (Multi-Way) ShootingElevatorExStage = EX_Tankuro
+//     (Multi-Way) ForestWorldWoodsStage
+//         Near Odyssey = Jyukai001 (also Jyukai002v)
+//         Near Talkatoo = Jyukai003
+//     (One-Way) ForestWorldWoodsTreasureStage = TreasureTree
+//     (One-Way) ForestWorldWoodsCostumeStage = Explorer_Bonus
+//     (Multi-Way) PackunPoisonExStage = PoisonEx
+//     (One-Way) AnimalChaseExStage = EX_AnimalChase
+//     (One-Way) KillerRoadExStage = KillerRoad
 
 // Cloud
-//     FukuwaraiKuriboStage
-//         Entrance/Exit = Fukuwarai
-//     Cube2DExStage
-//         Entrance/Exit = cube
+// 	(Multi-Way) CloudWorldHomeStage
+// 		FukuwaraiKuriboStage = Fukuwarai
+// 		Cube2DExStage = cube
+//     (One-Way) FukuwaraiKuriboStage = Fukuwarai
+//     (One-Way) Cube2DExStage = cube
 
 // Lost
-//     ClashWorldShopStage
-//         Entrance/Exit = Kinopio
-//     ImomuPoisonExStage
-//         Entrance = imomu_01
-//         Exit = imomu_02
-//     JangoExStage
-//         Entrance/Exit = ClashWorldMoonEX2
+// 	(Multi-Way) ClashWorldHomeStage
+// 		ClashWorldShopStage = Kinopio
+// 		ImomuPoisonExStage = imomu_02
+// 		JangoExStage = ClashWorldMoonEX2
+//     (One-Way) ClashWorldShopStage = Kinopio
+//     (Multi-Way) ImomuPoisonExStage = imomu_01
+//     (One-Way) JangoExStage = ClashWorldMoonEX2
 
 // Metro
-//     CityWorldMainTowerStage
-//         Bottom Entrance = main_enter
-//         Top Entrance = main_exit
-//     CityWorldFactoryStage
-//         Entrance/Exit = under001enter
-//     CityWorldShop01Stage
-//         Yellow Entrance = shop_coin
-//         Purple Entrance = shop_correct
-//     CityWorldSandSlotStage
-//         Entrance/Exit = Bonus
-//     CityPeopleRoadStage
+// 	(Multi-Way) CityWorldHomeStage
+// 		CityWorldMainTowerStage
+// 			Bottom = main_enter
+// 			Top = main_exit
+// 		CityWorldFactoryStage = under001enter
+// 		CityWorldShop01Stage
+// 			Yellow = shop_coin
+// 			Purple = shop_correct
+// 		CityWorldSandSlotStage = Bonus
+// 		CityPeopleRoadStage
+// 			Pre-Peace = gunsyu
+// 			Post-Peace = gunsyudokan
+// 		PoleGrabCeilExStage = tenjo
+// 		TrexBikeExStage = bike02return
+// 		PoleKillerExStage = boureturn
+// 		Note2D3DRoomExStage = onpu
+// 		ShootingCityExStage = taxireturn
+// 		CapRotatePackunExStage = kaitendokan
+// 		RadioControlExStage = car
+// 		ElectricWireExStage = densendokan
+// 		Theater2DExStage = theater
+// 		DonsukeExStage = donsuke
+// 		SwingSteelExStage = gragrareturn
+// 		BikeSteelExStage = bikereturn
+//     (Multi-Way) CityWorldMainTowerStage
+//         Bottom = main_enter
+//         Top = main_exit
+//     (One-Way) CityWorldFactoryStage = under001enter
+//     (Multi-Way) CityWorldShop01Stage
+//         Yellow = shop_coin
+//         Purple = shop_correct
+//     (One-Way) CityWorldSandSlotStage = Bonus
+//     (One/Multi-Way) CityPeopleRoadStage
 //         Entrance = gunsyu
 //         Exit over to rocket = gunsyudokan
-//     PoleGrabCeilExStage
-//         Entrance/Exit = tenjo
-//     TrexBikeExStage
-//         Entrance = bike02
-//         Exit = bike02return
-//     PoleKillerExStage
-//         Entrance = bou
-//         Exit = boureturn
-//     Note2D3DRoomExStage
-//         Entrance/Exit = onpu
-//     ShootingCityExStage
-//         Entrance = taxi
-//         Exit = taxireturn
-//     CapRotatePackunExStage
-//         Entrance/Exit = kaitendokan
-//     RadioControlExStage
-//         Entrance/Exit = car
-//     ElectricWireExStage
-//         Entrance = densen
-//         Exit = densendokan
-//     Theater2DExStage
-//         Entrance/Exit = theater
-//     DonsukeExStage
-//         Entrance/Exit = donsuke
-//     SwingSteelExStage
-//         Entrance = gragra
-//         Exit = gragrareturn
-//     BikeSteelExStage
-//         Entrance = bike
-//         Exit = bikereturn
+//     (One-Way) PoleGrabCeilExStage = tenjo
+//     (Multi-Way) TrexBikeExStage = bike02
+//     (Multi-Way) PoleKillerExStage = bou
+//     (One-Way) Note2D3DRoomExStage = onpu
+//     (Multi-Way) ShootingCityExStage = taxi
+//     (One-Way) CapRotatePackunExStage = kaitendokan
+//     (One-Way) RadioControlExStage = car
+//     (Multi-Way) ElectricWireExStage = densen
+//     (One-Way) Theater2DExStage = theater
+//     (One-Way) DonsukeExStage = donsuke
+//     (Multi-Way) SwingSteelExStage = gragra
+//     (Multi-Way) BikeSteelExStage = bike
 
 // Snow
-//     SnowWorldTownStage
-//         Entrance = SnowUGEnt
-//         Exit = SnowUGExit
-//     SnowWorldShopStage
-//         Entrance/Exit = ShopDoor
-//     For Snow Race Lobbies, allow player to enter there naturally
-//     SnowWorldCostumeStage
-//         Entrance/Exit = SnowCostumeEx
-//     SnowWorldCloudBonusExStage
-//         Entrance/Exit = EX_SkyBonus
-//     IceWalkerExStage
-//         Entrance/Exit = FigureWalker
-//     IceWaterBlockExStage
-//         Entrance = EX_IceWater
-//         Exit = EX_IceWater_Exit
-//     ByugoPuzzleExStage
-//         Entrance/Exit = ByugoPuzzle
-//     IceWaterDashExStage
-//         Entrance = EX_IceWaterDash
-//         Exit = EX_IceWaterDash_Exit
-//     KillerRailCollisionExStage
-//         Entrance = EX_RailCol2
-//         Exit = EX_RailCol2_Exit
+// 	(Multi-Way) SnowWorldHomeStage
+// 		SnowWorldTownStage = SnowUGExit
+// 		SnowWorldShopStage = ShopDoor
+// 		SnowWorldCostumeStage = SnowCostumeEx
+// 		SnowWorldCloudBonusExStage = EX_SkyBonus
+// 		IceWalkerExStage = FigureWalker
+// 		IceWaterBlockExStage = EX_IceWater_Exit
+// 		ByugoPuzzleExStage = ByugoPuzzle
+// 		IceWaterDashExStage = EX_IceWaterDash_Exit
+// 		KillerRailCollisionExStage = EX_RailCol2_Exit
+//     (Multi-Way) SnowWorldTownStage = SnowUGEnt
+//     (One-Way) SnowWorldShopStage = ShopDoor
+//     (One-Way) SnowWorldCostumeStage = SnowCostumeEx
+//     (One-Way) SnowWorldCloudBonusExStage = EX_SkyBonus
+//     (One-Way) IceWalkerExStage = FigureWalker
+//     (Multi-Way) IceWaterBlockExStage = EX_IceWater
+//     (One-Way) ByugoPuzzleExStage = ByugoPuzzle
+//     (Multi-Way) IceWaterDashExStage = EX_IceWaterDash
+//     (Multi-Way) KillerRailCollisionExStage = EX_RailCol2
 
 // Seaside
-//     SeaWorldUtsuboCaveStage
-//         Entrance = PukupukuCaveStart
-//         Exit = PukupukuCaveGoal
-//     SeaWorldVibrationStage
-//         Entrance/Exit = shindo_Lv2
-//     SeaWorldSecretStage
-//         Entrance/Exit = TreasureEventWorldSea
-//     SeaWorldCostumeStage
-//         Entrance/Exit = CostumeEventSeaWorld
-//     SeaWorldSneakingManStage
-//         Entrance/Exit = RoomEventWorldSea
-//     SenobiTowerExStage
-//         Entrance = SeaWorldEX3a
-//         Exit = SeaWorldEX3b
-//     CloudExStage
-//         Entrance = SeaWorldEX2
-//         Exit = SeaWorldEX2Return
-//     WaterValleyExStage
-//         Entrance = SeaWorldEX1a
-//         Exit = SeaWorldEX1b
-//     ReflectBombExStage
-//         Entrance/Exit = SeaWorldMoonEX1a
-//     TogezoRotateExStage
-//         Entrance/Exit = SeaWorldMoonEX2
+// 	(Multi-Way) SeaWorldHomeStage
+// 		SeaWorldUtsuboCaveStage = PukupukuCaveGoal
+// 		SeaWorldVibrationStage = shindo_Lv2
+// 		SeaWorldSecretStage = TreasureEventWorldSea
+// 		SeaWorldCostumeStage = CostumeEventSeaWorld
+// 		SeaWorldSneakingManStage = RoomEventWorldSea
+// 		SenobiTowerExStage = SeaWorldEX3b
+// 		CloudExStage = SeaWorldEX2Return
+// 		WaterValleyExStage = SeaWorldEX1b
+// 		ReflectBombExStage = SeaWorldMoonEX1a
+// 		TogezoRotateExStage = SeaWorldMoonEX2
+//     (Multi-Way) SeaWorldUtsuboCaveStage = PukupukuCaveStart
+//     (One-Way) SeaWorldVibrationStage = shindo_Lv2
+//     (One-Way) SeaWorldSecretStage = TreasureEventWorldSea
+//     (One-Way) SeaWorldCostumeStage = CostumeEventSeaWorld
+//     (One-Way) SeaWorldSneakingManStage = RoomEventWorldSea
+//     (Multi-Way) SenobiTowerExStage = SeaWorldEX3a
+//     (Multi-Way) CloudExStage = SeaWorldEX2
+//     (Multi-Way) WaterValleyExStage = SeaWorldEX1a
+//     (One-Way) ReflectBombExStage = SeaWorldMoonEX1a
+//     (One-Way) TogezoRotateExStage = SeaWorldMoonEX2
 
 // Luncheon
-//     LavaWorldUpDownExStage
-//         Entrance = KeyMoveEx
-//         Exit = KeyMoveExDokan
-//     LavaBonus1Zone
-//         Entrance/Exit = town
-//     LavaWorldShopStage
-//         Entrance/Exit = shop
-//     LavaWorldCostumeStage
-//         Entrance = CostumeEventWorldLava
-//         Exit = CostumeOut
-//     ForkExStage
-//         Entrance/Exit = ForkEX
-//     LavaWorldExcavationExStage
-//         Entrance/Exit = MartinCubeEx
-//     LavaWorldClockExStage
-//         Entrance = BBQEx
-//         Exit = BBQExDokan
-//     LavaWorldBubbleLaneExStage
-//         Entrance = PechoBubbleEx
-//         Exit = PechoBubbleExDokan
-//     LavaWorldTreasureStage
-//         Entrance/Exit = TreasureEventWorldLava
-//     GabuzouClockExStage
-//         Entrance = GabuzouClockEx
-//         Exit = GabuzouClockExdokan
-//     CapAppearLavaLiftExStage
-//         Entrance = LavaLiftEx
-//         Exit = LavaLiftExdokan
-//     LavaWorldFenceLiftExStage
-//         Entrance = FenceLiftEx
-//         Exit = FenceLiftExdokan (warping here manually does not work)
+// 	(Multi-Way) LavaWorldHomeStage
+// 		LavaWorldUpDownExStage = KeyMoveExDokan
+// 		LavaBonus1Zone = town
+// 		LavaWorldShopStage = shop
+// 		LavaWorldCostumeStage = CostumeOut
+// 		ForkExStage = ForkEX
+// 		LavaWorldExcavationExStage = MartinCubeEx
+// 		LavaWorldClockExStage = BBQExDokan
+// 		LavaWorldBubbleLaneExStage = PechoBubbleExDokan
+// 		LavaWorldTreasureStage = TreasureEventWorldLava
+// 		GabuzouClockExStage = GabuzouClockExdokan
+// 		CapAppearLavaLiftExStage = LavaLiftExdokan
+// 		LavaWorldFenceLiftExStage = FenceLiftExdokan (warping here manually does not work)
+//     (Multi-Way) LavaWorldUpDownExStage = KeyMoveEx
+//     (One-Way) LavaBonus1Zone = town
+//     (One-Way) LavaWorldShopStage = shop
+//     (Multi-Way) LavaWorldCostumeStage = CostumeEventWorldLava
+//     (One-Way) ForkExStage = ForkEX
+//     (One-Way) LavaWorldExcavationExStage = MartinCubeEx
+//     (Multi-Way) LavaWorldClockExStage = BBQEx
+//     (Multi-Way) LavaWorldBubbleLaneExStage = PechoBubbleEx
+//     (One-Way) LavaWorldTreasureStage = TreasureEventWorldLava
+//     (Multi-Way) GabuzouClockExStage = GabuzouClockEx
+//     (Multi-Way) CapAppearLavaLiftExStage = LavaLiftEx
+//     (Multi-Way) LavaWorldFenceLiftExStage = FenceLiftEx
 
 // Ruined
-//     DotTowerExStage
-//         Entrance/Exit = BossRaidWorldEx01_Eixt
-//     BullRunExStage
-//         Entrance = BossRaidWorldMoonEx02_Enter
-//         Exit = BossRaidWorldMoonEx02_Exit
+// 	(Multi-Way) BossRaidWorldHomeStage
+// 		DotTowerExStage = BossRaidWorldEx01_Eixt
+// 		BullRunExStage = BossRaidWorldMoonEx02_Exit
+//     (One-Way) DotTowerExStage = BossRaidWorldEx01_Eixt
+//     (Multi-Way) BullRunExStage = BossRaidWorldMoonEx02_Enter
 
 // Bowsers
-//     SkyWorldShopStage
-//         Entrance/Exit = shop
-//     SkyWorldCostumeStage
-//         Entrance/Exit = byoubu
-//     SkyWorldCloudBonusExStage
-//         Entrance/Exit = sora001
-//     SkyWorldTreasureStage
-//         Entrance/Exit = shopdress
-//     JizoSwitchExStage
-//         Entrance/Exit = jizo01
-//     TsukkunRotateExStage
-//         Entrance = tukkun000_enter
-//         Exit = tukkun000_exit (cannot spawn here, trapped unless ogre opens door)
-//     KaronWingTowerStage
-//         Entrance/Exit = Patakaron02
-//     TsukkunClimbExStage
-//         Entrance = tukkun001_enter
-//         Exit = tukkun001_exit
+// 	(Multi-Way) SkyWorldHomeStage
+// 		SkyWorldShopStage = shop
+// 		SkyWorldCostumeStage = byoubu
+// 		SkyWorldCloudBonusExStage = sora001
+// 		SkyWorldTreasureStage = shopdress
+// 		JizoSwitchExStage = jizo01
+// 		TsukkunRotateExStage = tukkun000_exit (cannot spawn here, trapped unless ogre opens door)
+// 		KaronWingTowerStage = Patakaron02
+// 		TsukkunClimbExStage = tukkun001_exit
+//     (One-Way) SkyWorldShopStage = shop
+//     (One-Way) SkyWorldCostumeStage = byoubu
+//     (One-Way) SkyWorldCloudBonusExStage = sora001
+//     (One-Way) SkyWorldTreasureStage = shopdress
+//     (One-Way) JizoSwitchExStage = jizo01
+//     (Multi-Way) TsukkunRotateExStage = tukkun000_enter
+//     (One-Way) KaronWingTowerStage = Patakaron02
+//     (Multi-Way) TsukkunClimbExStage = tukkun001_enter
 
 // Mushroom
-//     PeachWorldShopStage
-//         Entrance/Exit = PeachWorldShopA
-//     PeachWorldCostumeStage
-//         Entrance/Exit = CostumeEventWorldPeach
-//     FukuwaraiMarioStage
-//         Entrance/Exit = Fukuwarai2
-//     DotHardExStage
-//         Entrance/Exit = PeachWorldEx2a
-//     YoshiCloudExStage
-//         Entrance/Exit = PeachWorldEx1a
+// 	(Multi-Way) PeachWorldHomeStage
+// 		PeachWorldShopStage = PeachWorldShopA
+// 		PeachWorldCostumeStage = CostumeEventWorldPeach
+// 		FukuwaraiMarioStage = Fukuwarai2
+// 		DotHardExStage = PeachWorldEx2a
+// 		YoshiCloudExStage = PeachWorldEx1a
+//     (One-Way) PeachWorldShopStage = PeachWorldShopA
+//     (One-Way) PeachWorldCostumeStage = CostumeEventWorldPeach
+//     (One-Way) FukuwaraiMarioStage = Fukuwarai2
+//     (One-Way) DotHardExStage = PeachWorldEx2a
+//     (One-Way) YoshiCloudExStage = PeachWorldEx1a
