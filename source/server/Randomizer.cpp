@@ -69,6 +69,65 @@ bool Randomizer::openKeyboardSeed() {
 void Randomizer::randomize() {
     sead::ScopedCurrentHeapSetter heapSetter(sInstance->mHeap);
 
+    // sead::TList<const Stage> warpStages;
+    // name_id : name_id
+    // map {
+    //     sandHome_Slots: sandSlots_Slots,
+    //     sandHome_Shop: sandShop_Shop,
+    //     sandHome_Rocket: sandRocket_Rocket,
+    //     sandRocket_RocketEnd: sandHome_RocketEnd,
+    //     lakeHome_Shop: lakeShop_Shop
+    // }
+    // map.randomize()
+    // keep keys same, just shuffle values (cannot have overworld: overworld)
+    // map {
+    //     sandHome_Slots: sandSlots_Slots,
+    //     sandHome_Shop: sandShop_Shop,
+    //     sandHome_Rocket: lakeShop_Shop,
+    //     sandRocket_RocketEnd: sandHome_RocketEnd,
+    //     lakeHome_Shop: sandRocket_Rocket
+    // }
+    // map {
+    //     sandHome_Slots: sandSlots_Slots,
+    //     sandHome_Shop: sandShop_Shop,
+    //     metroHome_TowerStart: metroTower_TowerStart,
+    //     metroHome_TowerEnd: metroTower_TowerEnd,
+    //     lakeHome_Shop: lakeShop_Shop
+    // }
+    // map {
+    //     sandHome_Slots: sandSlots_Slots,
+    //     sandHome_Shop: sandShop_Shop,
+    //     metroHome_TowerStart: lakeShop_Shop,
+    //     metroHome_TowerEnd: metroTower_TowerEnd,
+    //     lakeHome_Shop: metroTower_TowerStart
+    // }
+    // sead::TList<std::pair<Stage, Stage>> foo;
+    // std::pair<Stage, Stage> = (sandWorldHomeStageViaSandWorldSlotStage, sandWorldSlotStage);
+
+    // pick two random entries (2 left right pairs)
+    // pick random left or right for entry1
+    // pick random left or right for entry2
+    // if valid (not overworld to overworld, something about pipes, multi-ways and one-ways, etc), swap two picked items
+
+    // keep keys same, just shuffle values (cannot have overworld: overworld)
+
+
+
+    // list {
+    //     sandHome_town <-> sandSlots_town,
+    //     sandHome_shop <-> sandShop_shop
+    // }
+    
+    // list {
+    //     sandHome_town <-> sandShop_shop,
+    //     sandHome_shop <-> sandSlots_town
+    // }
+
+    // currentStage: sandHome
+    // newStage: sandSlots
+    // newWarpId: town
+
+
     sead::TList<const char *> warpStages;
 
     auto x1 = sead::TListNode("WanwanClashExStage");
