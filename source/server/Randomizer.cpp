@@ -3,6 +3,7 @@
 #include "Keyboard.hpp"
 #include "server/Client.hpp"
 #include "sead/container/seadTList.h"
+#include <utility>
 
 SEAD_SINGLETON_DISPOSER_IMPL(Randomizer);
 
@@ -127,21 +128,78 @@ void Randomizer::randomize() {
     // newStage: sandSlots
     // newWarpId: town
 
+    static constexpr TransitionPoint sandWorldHomeStageAndSandWorldShopStageFrontOverWorldTransitionPoint = {sInstance->sandWorldHomeStageAndSandWorldShopStageFrontTransition.overWorld, sInstance->sandWorldHomeStageAndSandWorldShopStageFrontTransition.warpId};
+    // sandWorldHomeStageAndSandWorldShopStageFrontOverWorldTransitionPoint = {"SandWorldHomeStage", "bar1"}
+    static constexpr TransitionPoint sandWorldHomeStageAndSandWorldShopStageFrontSubAreaTransitionPoint = {sInstance->sandWorldHomeStageAndSandWorldShopStageFrontTransition.subArea, sInstance->sandWorldHomeStageAndSandWorldShopStageFrontTransition.warpId};
+    // sandWorldHomeStageAndSandWorldShopStageFrontSubAreaTransitionPoint = {"SandWorldShopStage", "bar1"}
+    std::pair<TransitionPoint, TransitionPoint> sandWorldHomeStageAndSandWorldShopStageFrontTransitionPointPair(sandWorldHomeStageAndSandWorldShopStageFrontOverWorldTransitionPoint, sandWorldHomeStageAndSandWorldShopStageFrontSubAreaTransitionPoint);
+    // sandWorldHomeStageAndSandWorldShopStageFrontTransitionPointPair = {{"SandWorldHomeStage", "bar1"}, {"SandWorldShopStage", "bar1"}}
 
-    sead::TList<const char *> warpStages;
+    static constexpr TransitionPoint sandWorldHomeStageAndSandWorldSlotStageOverWorldTransitionPoint = {sInstance->sandWorldHomeStageAndSandWorldSlotStageTransition.overWorld, sInstance->sandWorldHomeStageAndSandWorldSlotStageTransition.warpId};
+    // sandWorldHomeStageAndSandWorldSlotStageOverWorldTransitionPoint = {"SandWorldHomeStage", "town"}
+    static constexpr TransitionPoint sandWorldHomeStageAndSandWorldSlotStageSubAreaTransitionPoint = {sInstance->sandWorldHomeStageAndSandWorldSlotStageTransition.subArea, sInstance->sandWorldHomeStageAndSandWorldSlotStageTransition.warpId};
+    // sandWorldHomeStageAndSandWorldSlotStageSubAreaTransitionPoint = {"SandWorldSlotStage", "town"}
+    std::pair<TransitionPoint, TransitionPoint> sandWorldHomeStageToSandWorldSlotStageTransitionPointPair(sandWorldHomeStageAndSandWorldSlotStageOverWorldTransitionPoint, sandWorldHomeStageAndSandWorldSlotStageSubAreaTransitionPoint);
+    // sandWorldHomeStageToSandWorldSlotStageTransitionPointPair = {{"SandWorldHomeStage", "town"}, {"SandWorldSlotStage", "town"}}
 
-    auto x1 = sead::TListNode("WanwanClashExStage");
-    warpStages.pushBack(&x1);
+    sead::TList<std::pair<TransitionPoint, TransitionPoint>> transitionList;
+    auto sandWorldHomeStageAndSandWorldShopStageFrontTransitionPointPairNode = sead::TListNode(sandWorldHomeStageAndSandWorldShopStageFrontTransitionPointPair);
+    // sandWorldHomeStageAndSandWorldShopStageFrontTransitionPointPairNode = ({{"SandWorldHomeStage", "bar1"}, {"SandWorldShopStage", "bar1"}})
+    auto sandWorldHomeStageToSandWorldSlotStageTransitionPointPairNode = sead::TListNode(sandWorldHomeStageToSandWorldSlotStageTransitionPointPair);
+    // sandWorldHomeStageToSandWorldSlotStageTransitionPointPairNode = ({{"SandWorldHomeStage", "town"}, {"SandWorldSlotStage", "town"}})
+    transitionList.pushBack(&sandWorldHomeStageAndSandWorldShopStageFrontTransitionPointPairNode);
+    transitionList.pushBack(&sandWorldHomeStageToSandWorldSlotStageTransitionPointPairNode);
+    // transitionList = {
+    //     ({{"SandWorldHomeStage", "bar1"}, {"SandWorldShopStage", "bar1"}}),
+    //     ({{"SandWorldHomeStage", "town"}, {"SandWorldSlotStage", "town"}})
+    // }
 
-    auto seed = getSeed();
-    sead::Random x(seed);
-    warpStages.shuffle(&x);
+    // auto node1UseFirst = true;
+    // auto node2UseFirst = false;
 
-    auto first = warpStages.front();
-    auto warpStage = first->mData;
-    sInstance->WarpMap.clear();
-    sead::FixedSafeString<0x80> trexPoppunExStageString("TrexPoppunExStage");
-    sInstance->WarpMap.insert(trexPoppunExStageString, warpStage);
+    // TransitionPoint &node1Swap = transitionList.nth(0)->mData.first;
+    // if (!node1UseFirst) {
+    //     node1Swap = transitionList.nth(0)->mData.second;
+    // }
+
+    // TransitionPoint &node2Swap = node2Swap = transitionList.nth(1)->mData.first;
+    // if (!node2UseFirst) {
+    //     node2Swap = transitionList.nth(1)->mData.second;
+    // }
+
+    // std::swap(node1Swap, node2Swap);
+
+    
+    std::swap(transitionList.nth(0)->mData.first, transitionList.nth(1)->mData.second);
+
+    // transitionList = {
+    //     ({{"SandWorldSlotStage", "town"}, {"SandWorldShopStage", "bar1"}}),
+    //     ({{"SandWorldHomeStage", "town"}, {"SandWorldHomeStage", "bar1"}})
+    // }
+
+
+    auto firstPair = transitionList.nth(0);
+    auto secondPair = transitionList.nth(1);
+
+    sead::FixedSafeString<0x80> foo(firstPair->mData.first.stage);
+
+    sInstance->setDebugString(foo);
+
+
+    // sead::TList<const char *> warpStages;
+
+    // auto x1 = sead::TListNode("WanwanClashExStage");
+    // warpStages.pushBack(&x1);
+
+    // auto seed = getSeed();
+    // sead::Random x(seed);
+    // warpStages.shuffle(&x);
+
+    // auto first = warpStages.front();
+    // auto warpStage = first->mData;
+    // sInstance->WarpMap.clear();
+    // sead::FixedSafeString<0x80> trexPoppunExStageString("TrexPoppunExStage");
+    // sInstance->WarpMap.insert(trexPoppunExStageString, warpStage);
 }
 
 void Randomizer::warp(GameDataHolder *thisPtr, const ChangeStageInfo *changeStageInfo, int i) {
