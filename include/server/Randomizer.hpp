@@ -7,6 +7,17 @@
 #include "game/GameData/GameDataHolderAccessor.h"
 #include "game/GameData/GameDataHolderWriter.h"
 
+
+enum StageType : unsigned int {
+    OVER_WORLD,
+    SUB_AREA
+};
+
+enum ExitType : unsigned int {
+    ONE_WAY,
+    MULTI_WAY
+};
+
 struct Transition {
     const char* overWorld;
     const char* subArea;
@@ -39,6 +50,9 @@ public:
     static void setDebugString(sead::FixedSafeString<0x80> string);
     static const char * getDebugString();
     static int getDebugStringCounter();
+
+    sead::TreeMap<const char*, StageType> stageTypeMap;
+    sead::TreeMap<const char*, ExitType> exitTypeMap;
 
     // Cap
     static constexpr Transition capWorldHomeStageAndCapWorldTowerStageBottomTransition = {"CapWorldHomeStage", "CapWorldTowerStage", "Ex"};
