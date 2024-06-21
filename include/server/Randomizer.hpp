@@ -2,10 +2,13 @@
 
 #include "sead/heap/seadDisposer.h"
 #include "heap/seadExpHeap.h"
+#include "sead/container/seadObjArray.h"
+#include "sead/container/seadTList.h"
 #include "sead/container/seadTreeMap.h"
 #include "sead/container/seadTreeNode.h"
 #include "game/GameData/GameDataHolderAccessor.h"
 #include "game/GameData/GameDataHolderWriter.h"
+#include <utility>
 
 
 enum StageType : unsigned int {
@@ -53,6 +56,8 @@ public:
 
     sead::TreeMap<const char*, StageType> stageTypeMap;
     sead::TreeMap<const char*, ExitType> exitTypeMap;
+    sead::TList<std::pair<TransitionPoint, TransitionPoint>> transitionList;
+    sead::ObjArray<std::pair<TransitionPoint, TransitionPoint>> transitionObjArray;
 
     // Cap
     static constexpr Transition capWorldHomeStageAndCapWorldTowerStageBottomTransition = {"CapWorldHomeStage", "CapWorldTowerStage", "Ex"};
